@@ -449,7 +449,7 @@ public node drjlt_pc301_v12 {
     engine.add_ignition_module(ignition_module)
 }
 
-private node drjlt_type3 {
+private node drjlt_type2 {
     alias output __out:
         vehicle(
             mass: 1000 * units.kg,
@@ -478,7 +478,7 @@ private node drjlt_7mt {
 public node main {
     run(
         engine: drjlt_pc301_v12(),
-        vehicle: drjlt_type3(),
+        vehicle: drjlt_type2(),
         transmission: drjlt_7mt()
     )
 }
