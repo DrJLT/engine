@@ -28,10 +28,10 @@ private node v16_45_head {
     input intake_camshaft;
     input exhaust_camshaft;
     input chamber_volume: 28 * units.cc;
-    input intake_runner_volume: 149.6 * units.cc;
-    input intake_runner_cross_section_area: 2 * units.inch * 2 * units.inch;
+    input intake_runner_volume: 150 * units.cc;
+    input intake_runner_cross_section_area: 4 * units.cm * 4 * units.cm;
     input exhaust_runner_volume: 50.0 * units.cc;
-    input exhaust_runner_cross_section_area: 2 * units.inch * 2 * units.inch;
+    input exhaust_runner_cross_section_area: 4 * units.cm * 4 * units.cm;
 
     input flow_attenuation: 1.0;
     input lift_scale: 1.0;
@@ -192,7 +192,7 @@ public node drjlt_pg601_v16 {
     label bore(82 * units.mm)
     label rod_length(160 * units.mm)
     label rod_mass(250 * units.g)
-    label compression_height(1.0 * units.inch)
+    label compression_height(25 * units.mm)
     label crank_mass(60 * units.lb)
     label flywheel_mass(20 * units.lb)
     label flywheel_radius(7 * units.inch)
@@ -239,7 +239,7 @@ public node drjlt_pg601_v16 {
         .add_rod_journal(rj7)
 
     piston_parameters piston_params(
-        mass: (250) * units.g, // 414 - piston mass, 152 - pin weight
+        mass: (250) * units.g,
         compression_height: compression_height,
         wrist_pin_position: 0.0,
         displacement: 0.0
@@ -256,13 +256,13 @@ public node drjlt_pg601_v16 {
     )
 
     intake intake(
-        plenum_volume: 0.75 * units.L,
-        plenum_cross_section_area: 15.0 * units.cm2,
+        plenum_volume: 12 * units.L,
+        plenum_cross_section_area: 150 * units.cm2,
         intake_flow_rate: k_carb(3200.0),
         runner_flow_rate: k_carb(200.0),
-        runner_length: 10 * units.cm,
+        runner_length: 20 * units.cm,
         idle_flow_rate: k_carb(0.0),
-        idle_throttle_plate_position: 0.997,
+        idle_throttle_plate_position: 0.998,
         velocity_decay: 0.5
     )
 
