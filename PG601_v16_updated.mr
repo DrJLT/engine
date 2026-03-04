@@ -262,7 +262,7 @@ public node drjlt_pg601_v16 {
         runner_flow_rate: k_carb(200.0),
         runner_length: 15 * units.cm,
         idle_flow_rate: k_carb(0.0),
-        idle_throttle_plate_position: 0.997,
+        idle_throttle_plate_position: 0.998,
         velocity_decay: 0.5
     )
 
