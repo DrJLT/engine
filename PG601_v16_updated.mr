@@ -30,8 +30,8 @@ private node v16_45_head {
     input chamber_volume: 28 * units.cc;
     input intake_runner_volume: 150 * units.cc;
     input intake_runner_cross_section_area: 36 * units.mm * 36 * units.mm;
-    input exhaust_runner_volume: 50.0 * units.cc;
-    input exhaust_runner_cross_section_area: 38 * units.mm * 38 * units.mm;
+    input exhaust_runner_volume: 600.0 * units.cc;
+    input exhaust_runner_cross_section_area: 39 * units.mm * 39 * units.mm;
 
     input flow_attenuation: 1.0;
     input lift_scale: 1.0;
@@ -171,7 +171,7 @@ public node drjlt_pg601_v16 {
     engine engine(
         name: "DrJLT PG601 [V16]",
         starter_torque: 200 * units.lb_ft,
-        starter_speed: 500 * units.rpm,
+        starter_speed: 1500 * units.rpm,
         redline: 8500 * units.rpm,
         throttle_gamma: 2.0,
         fuel: fuel(
@@ -260,16 +260,16 @@ public node drjlt_pg601_v16 {
         plenum_cross_section_area: 150 * units.cm2,
         intake_flow_rate: k_carb(3200.0),
         runner_flow_rate: k_carb(200.0),
-        runner_length: 20 * units.cm,
+        runner_length: 15 * units.cm,
         idle_flow_rate: k_carb(0.0),
-        idle_throttle_plate_position: 0.998,
+        idle_throttle_plate_position: 0.997,
         velocity_decay: 0.5
     )
 
     exhaust_system_parameters es_params(
-        outlet_flow_rate: k_carb(4000.0),
+        outlet_flow_rate: k_carb(3840.0),
         primary_tube_length: 20.0 * units.inch,
-        primary_flow_rate: k_carb(1000.0),
+        primary_flow_rate: k_carb(240.0),
         velocity_decay: 1
     )
 
