@@ -171,7 +171,7 @@ public node drjlt_pg601_v16 {
     engine engine(
         name: "DrJLT PG601 [V16]",
         starter_torque: 200 * units.lb_ft,
-        starter_speed: 1500 * units.rpm,
+        starter_speed: 2000 * units.rpm,
         redline: 8500 * units.rpm,
         throttle_gamma: 2.0,
         fuel: fuel(
@@ -183,7 +183,7 @@ public node drjlt_pg601_v16 {
         hf_gain: 0.01,
         noise: 1.0,
         jitter: 0.1
-        // simulation_frequency: 8000
+        // simulation_frequency: 8500
     )
 
     wires wires()
@@ -255,10 +255,21 @@ public node drjlt_pg601_v16 {
         length: rod_length
     )
 
-    intake intake(
-        plenum_volume: 12 * units.L,
+    intake intake1(
+        plenum_volume: 6 * units.L,
         plenum_cross_section_area: 150 * units.cm2,
-        intake_flow_rate: k_carb(3200.0),
+        intake_flow_rate: k_carb(2000.0),
+        runner_flow_rate: k_carb(200.0),
+        runner_length: 15 * units.cm,
+        idle_flow_rate: k_carb(0.0),
+        idle_throttle_plate_position: 0.998,
+        velocity_decay: 0.5
+    )
+
+    intake intake2(
+        plenum_volume: 6 * units.L,
+        plenum_cross_section_area: 150 * units.cm2,
+        intake_flow_rate: k_carb(2000.0),
         runner_flow_rate: k_carb(200.0),
         runner_length: 15 * units.cm,
         idle_flow_rate: k_carb(0.0),
@@ -267,19 +278,31 @@ public node drjlt_pg601_v16 {
     )
 
     exhaust_system_parameters es_params(
-        outlet_flow_rate: k_carb(3840.0),
+        outlet_flow_rate: k_carb(1000.0),
         primary_tube_length: 20.0 * units.inch,
         primary_flow_rate: k_carb(240.0),
         velocity_decay: 1
     )
 
-    exhaust_system exhaust0(
+    exhaust_system exhaust1(
         es_params,
         audio_volume: 1.0,
         length: 40 * units.inch,
         impulse_response: ir_lib.mild_exhaust_0_reverb
     )
-    exhaust_system exhaust1(
+    exhaust_system exhaust2(
+        es_params,
+        audio_volume: 1.0,
+        length: 40 * units.inch,
+        impulse_response: ir_lib.mild_exhaust_0_reverb
+    )
+    exhaust_system exhaust3(
+        es_params,
+        audio_volume: 1.0,
+        length: 40 * units.inch,
+        impulse_response: ir_lib.mild_exhaust_0_reverb
+    )
+    exhaust_system exhaust4(
         es_params,
         audio_volume: 1.0,
         length: 40 * units.inch,
@@ -298,7 +321,7 @@ public node drjlt_pg601_v16 {
             piston: piston(piston_params, blowby: k_28inH2O(0.0)),
             connecting_rod: connecting_rod(cr_params),
             rod_journal: rj0,
-            intake: intake,
+            intake: intake1,
             exhaust_system: exhaust1,
             ignition_wire: wires.wire1
         )
@@ -306,7 +329,7 @@ public node drjlt_pg601_v16 {
             piston: piston(piston_params, blowby: k_28inH2O(0.0)),
             connecting_rod: connecting_rod(cr_params),
             rod_journal: rj1,
-            intake: intake,
+            intake: intake1,
             exhaust_system: exhaust1,
             ignition_wire: wires.wire2
         )
@@ -314,39 +337,39 @@ public node drjlt_pg601_v16 {
             piston: piston(piston_params, blowby: k_28inH2O(0.0)),
             connecting_rod: connecting_rod(cr_params),
             rod_journal: rj2,
-            intake: intake,
-            exhaust_system: exhaust1,
+            intake: intake1,
+            exhaust_system: exhaust2,
             ignition_wire: wires.wire3
         )
         .add_cylinder(
             piston: piston(piston_params, blowby: k_28inH2O(0.0)),
             connecting_rod: connecting_rod(cr_params),
             rod_journal: rj3,
-            intake: intake,
-            exhaust_system: exhaust1,
+            intake: intake1,
+            exhaust_system: exhaust2,
             ignition_wire: wires.wire4
         )
         .add_cylinder(
             piston: piston(piston_params, blowby: k_28inH2O(0.0)),
             connecting_rod: connecting_rod(cr_params),
             rod_journal: rj4,
-            intake: intake,
-            exhaust_system: exhaust1,
+            intake: intake1,
+            exhaust_system: exhaust2,
             ignition_wire: wires.wire5
         )
         .add_cylinder(
             piston: piston(piston_params, blowby: k_28inH2O(0.0)),
             connecting_rod: connecting_rod(cr_params),
             rod_journal: rj5,
-            intake: intake,
-            exhaust_system: exhaust1,
+            intake: intake1,
+            exhaust_system: exhaust2,
             ignition_wire: wires.wire6
         )
         .add_cylinder(
             piston: piston(piston_params, blowby: k_28inH2O(0.0)),
             connecting_rod: connecting_rod(cr_params),
             rod_journal: rj6,
-            intake: intake,
+            intake: intake1,
             exhaust_system: exhaust1,
             ignition_wire: wires.wire7
         )
@@ -354,7 +377,7 @@ public node drjlt_pg601_v16 {
             piston: piston(piston_params, blowby: k_28inH2O(0.0)),
             connecting_rod: connecting_rod(cr_params),
             rod_journal: rj7,
-            intake: intake,
+            intake: intake1,
             exhaust_system: exhaust1,
             ignition_wire: wires.wire8
         )
@@ -370,64 +393,64 @@ public node drjlt_pg601_v16 {
             piston: piston(piston_params, blowby: k_28inH2O(0.0)),
             connecting_rod: connecting_rod(cr_params),
             rod_journal: rj0,
-            intake: intake,
-            exhaust_system: exhaust0,
+            intake: intake2,
+            exhaust_system: exhaust3,
             ignition_wire: wires.wire9
         )
         .add_cylinder(
             piston: piston(piston_params, blowby: k_28inH2O(0.0)),
             connecting_rod: connecting_rod(cr_params),
             rod_journal: rj1,
-            intake: intake,
-            exhaust_system: exhaust0,
+            intake: intake2,
+            exhaust_system: exhaust3,
             ignition_wire: wires.wire10
         )
         .add_cylinder(
             piston: piston(piston_params, blowby: k_28inH2O(0.0)),
             connecting_rod: connecting_rod(cr_params),
             rod_journal: rj2,
-            intake: intake,
-            exhaust_system: exhaust0,
+            intake: intake2,
+            exhaust_system: exhaust4,
             ignition_wire: wires.wire11
         )
         .add_cylinder(
             piston: piston(piston_params, blowby: k_28inH2O(0.0)),
             connecting_rod: connecting_rod(cr_params),
             rod_journal: rj3,
-            intake: intake,
-            exhaust_system: exhaust0,
+            intake: intake2,
+            exhaust_system: exhaust4,
             ignition_wire: wires.wire12
         )
         .add_cylinder(
             piston: piston(piston_params, blowby: k_28inH2O(0.0)),
             connecting_rod: connecting_rod(cr_params),
             rod_journal: rj4,
-            intake: intake,
-            exhaust_system: exhaust0,
+            intake: intake2,
+            exhaust_system: exhaust4,
             ignition_wire: wires.wire13
         )
         .add_cylinder(
             piston: piston(piston_params, blowby: k_28inH2O(0.0)),
             connecting_rod: connecting_rod(cr_params),
             rod_journal: rj5,
-            intake: intake,
-            exhaust_system: exhaust0,
+            intake: intake2,
+            exhaust_system: exhaust4,
             ignition_wire: wires.wire14
         )
         .add_cylinder(
             piston: piston(piston_params, blowby: k_28inH2O(0.0)),
             connecting_rod: connecting_rod(cr_params),
             rod_journal: rj6,
-            intake: intake,
-            exhaust_system: exhaust0,
+            intake: intake2,
+            exhaust_system: exhaust3,
             ignition_wire: wires.wire15
         )
         .add_cylinder(
             piston: piston(piston_params, blowby: k_28inH2O(0.0)),
             connecting_rod: connecting_rod(cr_params),
             rod_journal: rj7,
-            intake: intake,
-            exhaust_system: exhaust0,
+            intake: intake2,
+            exhaust_system: exhaust3,
             ignition_wire: wires.wire16
         )
         .set_cylinder_head(
