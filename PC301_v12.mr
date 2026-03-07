@@ -24,8 +24,8 @@ private node v12_60_head {
     input intake_camshaft;
     input exhaust_camshaft;
     input chamber_volume: 19 * units.cc;
-    input intake_runner_volume: 100 * units.cc;
-    input intake_runner_cross_section_area: 38 * units.mm * 38 * units.mm;
+    input intake_runner_volume: 125 * units.cc;
+    input intake_runner_cross_section_area: 36 * units.mm * 36 * units.mm;
     input exhaust_runner_volume: 100.0 * units.cc;
     input exhaust_runner_cross_section_area: 4 * units.cm * 4 * units.cm;
 
@@ -159,7 +159,7 @@ public node drjlt_pc301_v12 {
     engine engine(
         name: "DrJLT PC301 [V12]",
         starter_torque: 200 * units.lb_ft,
-        starter_speed: 500 * units.rpm,
+        starter_speed: 2000 * units.rpm,
         redline: 12000 * units.rpm,
         throttle_gamma: 2.0,
         fuel: fuel(
@@ -240,11 +240,11 @@ public node drjlt_pc301_v12 {
     )
 
     intake intake(
-        plenum_volume: 0.15 * units.L,
+        plenum_volume: 0.126 * units.L,
         plenum_cross_section_area: 12.6 * units.cm2,
-        intake_flow_rate: k_carb(2400.0),
+        intake_flow_rate: k_carb(2000.0),
         runner_flow_rate: k_carb(200.0),
-        runner_length: 8 * units.cm,
+        runner_length: 10 * units.cm,
         idle_flow_rate: k_carb(0.0),
         idle_throttle_plate_position: 0.998,
         velocity_decay: 0.5
@@ -257,16 +257,28 @@ public node drjlt_pc301_v12 {
         velocity_decay: 1
     )
 
-    exhaust_system exhaust0(
-        es_params,
-        audio_volume: 1.0,
-        length: 40 * units.inch,
-        impulse_response: ir_lib.mild_exhaust_0_reverb
-    )
     exhaust_system exhaust1(
         es_params,
         audio_volume: 1.0,
-        length: 40 * units.inch,
+        length: 20 * units.inch,
+        impulse_response: ir_lib.mild_exhaust_0_reverb
+    )
+    exhaust_system exhaust2(
+        es_params,
+        audio_volume: 1.0,
+        length: 20 * units.inch,
+        impulse_response: ir_lib.mild_exhaust_0_reverb
+    )
+    exhaust_system exhaust3(
+        es_params,
+        audio_volume: 1.0,
+        length: 20 * units.inch,
+        impulse_response: ir_lib.mild_exhaust_0_reverb
+    )
+    exhaust_system exhaust4(
+        es_params,
+        audio_volume: 1.0,
+        length: 20 * units.inch,
         impulse_response: ir_lib.mild_exhaust_0_reverb
     )
 
@@ -307,7 +319,7 @@ public node drjlt_pc301_v12 {
             connecting_rod: connecting_rod(cr_params),
             rod_journal: rj3,
             intake: intake,
-            exhaust_system: exhaust1,
+            exhaust_system: exhaust2,
             ignition_wire: wires.wire4
         )
         .add_cylinder(
@@ -315,7 +327,7 @@ public node drjlt_pc301_v12 {
             connecting_rod: connecting_rod(cr_params),
             rod_journal: rj4,
             intake: intake,
-            exhaust_system: exhaust1,
+            exhaust_system: exhaust2,
             ignition_wire: wires.wire5
         )
         .add_cylinder(
@@ -323,7 +335,7 @@ public node drjlt_pc301_v12 {
             connecting_rod: connecting_rod(cr_params),
             rod_journal: rj5,
             intake: intake,
-            exhaust_system: exhaust1,
+            exhaust_system: exhaust2,
             ignition_wire: wires.wire6
         )
         .set_cylinder_head(
@@ -339,7 +351,7 @@ public node drjlt_pc301_v12 {
             connecting_rod: connecting_rod(cr_params),
             rod_journal: rj0,
             intake: intake,
-            exhaust_system: exhaust0,
+            exhaust_system: exhaust3,
             ignition_wire: wires.wire7
         )
         .add_cylinder(
@@ -347,7 +359,7 @@ public node drjlt_pc301_v12 {
             connecting_rod: connecting_rod(cr_params),
             rod_journal: rj1,
             intake: intake,
-            exhaust_system: exhaust0,
+            exhaust_system: exhaust3,
             ignition_wire: wires.wire8
         )
         .add_cylinder(
@@ -355,7 +367,7 @@ public node drjlt_pc301_v12 {
             connecting_rod: connecting_rod(cr_params),
             rod_journal: rj2,
             intake: intake,
-            exhaust_system: exhaust0,
+            exhaust_system: exhaust3,
             ignition_wire: wires.wire9
         )
         .add_cylinder(
@@ -363,7 +375,7 @@ public node drjlt_pc301_v12 {
             connecting_rod: connecting_rod(cr_params),
             rod_journal: rj3,
             intake: intake,
-            exhaust_system: exhaust0,
+            exhaust_system: exhaust4,
             ignition_wire: wires.wire10
         )
         .add_cylinder(
@@ -371,7 +383,7 @@ public node drjlt_pc301_v12 {
             connecting_rod: connecting_rod(cr_params),
             rod_journal: rj4,
             intake: intake,
-            exhaust_system: exhaust0,
+            exhaust_system: exhaust4,
             ignition_wire: wires.wire11
         )
         .add_cylinder(
@@ -379,7 +391,7 @@ public node drjlt_pc301_v12 {
             connecting_rod: connecting_rod(cr_params),
             rod_journal: rj5,
             intake: intake,
-            exhaust_system: exhaust0,
+            exhaust_system: exhaust4,
             ignition_wire: wires.wire12
         )
         .set_cylinder_head(
